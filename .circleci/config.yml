@@ -1,14 +1,14 @@
 version: 2.1
 ​
 jobs:
-  print-a-message:
+  build:
     docker:
-      - image: cimg/base:2022.03
+      - image: cimg/node:18.4.0
     steps:
       - checkout
       - run: yarn version
 ​
 workflows:
-  my-workflow:
+  build_only:
     jobs:
-      - print-a-message
+      - build
