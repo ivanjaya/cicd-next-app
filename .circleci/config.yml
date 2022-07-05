@@ -2,26 +2,11 @@ version: 2.1
 
 jobs:
   build:
-    docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
-      - run: echo "this is the build job"
-  test:
-    docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD
-    steps:
-      - checkout
-      - run: echo "this is the test job"
+      - run: yarn version
 
 workflows:
-  build_and_test:
+  build_only:
     jobs:
       - build
-      - test
