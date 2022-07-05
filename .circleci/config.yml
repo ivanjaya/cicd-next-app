@@ -1,12 +1,17 @@
 version: 2.1
-
+​
 jobs:
-  build:
+  print-a-message:
+    docker:
+      - image: cimg/base:2022.03
+    parameters:
+      message:
+        type: string
     steps:
-      - checkout
       - run: yarn version
-
+​
 workflows:
-  build_only:
+  my-workflow:
     jobs:
-      - build
+      - print-a-message:
+          message: Hello!
