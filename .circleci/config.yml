@@ -15,4 +15,4 @@ workflows:
   build_only:
     jobs:
       - build:
-          context: Testing-Env-Vars
+          context: MY_ENV_VAR
