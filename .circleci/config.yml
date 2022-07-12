@@ -4,7 +4,7 @@ executors:
   my-executor:
     docker:
       - image: cimg/node:18.4.0
-    working_directory: /tmp
+    working_directory: /
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
     executor: my-executor
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: /workspace
       - run: yarn test
 
 workflows:
