@@ -7,12 +7,17 @@ jobs:
     steps:
       - checkout
       - run: yarn version
-      - run:
-          name: 'Print an ENV VAR Stored in the Project'
-          command: echo ${MY_ENV_VAR}
+      - run: yarn build
+  build:
+    docker:
+      - image: cimg/node:18.4.0
+    steps:
+      - checkout
+      - run: yarn test
 
 workflows:
-  build_only:
+  version: 2
+  build_and_test:
     jobs:
-      - build:
-          context: MY_ENV_VAR
+      - build
+      - test
