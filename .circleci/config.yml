@@ -12,6 +12,4 @@ jobs:
 workflows:
   build_only:
     jobs:
-      - build:
-          context:
-            - my-context
+      - build
