@@ -1,25 +1,34 @@
 version: 2.1
 
-jobs:
-  build:
+executors:
+  my-executor:
     docker:
       - image: cimg/node:18.4.0
+    working_directory: /tmp
+
+jobs:
+  build:
+    executor: my-executor
     steps:
       - checkout
       - run: yarn version
       - run: yarn install
       - run: yarn build
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - echo-output
   test:
-    docker:
-      - image: cimg/node:18.4.0
+    executor: my-executor
     steps:
+      - attach_workspace:
+          at: /tmp/workspace
       - run: yarn test
 
 workflows:
-  version: 2
   build_and_test:
     jobs:
       - build
       - test:
-        requires:
-          - build
+          requires:
+            - build
