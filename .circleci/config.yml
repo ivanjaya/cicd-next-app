@@ -7,9 +7,12 @@ jobs:
     steps:
       - checkout
       - run: yarn version
-      - run: echo ${MY_ENV_VAR}
+      - run:
+          name: "Print an ENV VAR Stored in the Project"
+          name: echo ${MY_ENV_VAR}
 
 workflows:
   build_only:
     jobs:
-      - build
+      - build:
+          context: Testing-Env-Vars
