@@ -8,8 +8,8 @@ jobs:
       - checkout
       - run: yarn version
       - run:
-          name: "Print an ENV VAR Stored in the Project"
-          name: echo ${MY_ENV_VAR}
+          name: 'Print an ENV VAR Stored in the Project'
+          command: echo ${MY_ENV_VAR}
 
 workflows:
   build_only:
