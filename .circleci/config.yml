@@ -21,13 +21,14 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - '77:bb:0d:b1:6b:04:41:7f:f0:76:c9:97:37:fb:24:4d'
+      - run: npm install -g --silent gh-pages@2.0.1
       - deploy:
           name: Deploy next js app
           command: |
             git config --global user.name "fjtiaratsalsa"
             git config --global user.email "tiara@fivejack.com"
       - run: echo "Deploy start on `date`"
-      - run: gh-pages --dist workspace
+      - run: gh-pages --dist .next
 workflows:
   build_and_test_and_deploy:
     jobs:
