@@ -9,7 +9,7 @@ executors:
       - image: cimg/node:18.4.0
 
 jobs:
-  build_and_test:
+  build:
     executor: my-executor
     steps:
       - checkout
@@ -17,6 +17,18 @@ jobs:
       - run: yarn version
       - run: yarn install
       - run: yarn build
+      - run: mkdir -p workspace
+      - run: echo "Hello, world!" > workspace/echo-output
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - echo-output
+  test:
+    executor: my-executor
+    steps:
+      - attach_workspace:
+          at: /workspace
+      - run: echo "`cat /workspace/echo-output`"
       - run: echo "Test start on `date`"
       - run: yarn test
 
