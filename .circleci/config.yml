@@ -25,7 +25,7 @@ jobs:
       - run: git config user.email "ivanjaya@fivejack.com"
       - run: git config user.name "Ivan"
       - run: echo "Deploy start on `date`"
-      - run: gh-pages --dist workspace/out
+      - run: gh-pages --dist out
 workflows:
   build_and_test_and_deploy:
     jobs:
