@@ -20,7 +20,7 @@ jobs:
       - run: yarn test
       - add_ssh_keys:
           fingerprints:
-            - '77:bb:0d:b1:6b:04:41:7f:f0:76:c9:97:37:fb:24:4d'
+            - '10:3e:e4:71:0c:da:36:9c:b2:4c:82:f3:38:b3:ef:9b'
       - run: npm install -g --silent gh-pages@2.0.1
       - deploy:
           name: Deploy next js app
