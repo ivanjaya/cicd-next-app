@@ -17,25 +17,30 @@ jobs:
       - run: yarn version
       - run: yarn install
       - run: yarn build
-      - run: mkdir -p workspace
-      - run: echo "Hello, world!" > workspace/echo-output
       - persist_to_workspace:
-          root: workspace
+          root: /
           paths:
-            - echo-output
+            - .next
   test:
     executor: my-executor
     steps:
       - attach_workspace:
-          at: /workspace
-      - run: echo "`cat /workspace/echo-output`"
+          at: .next
       - run: echo "Test start on `date`"
       - run: yarn test
 
 workflows:
   build_and_test:
     jobs:
-      - build
+      - need-approval:
+          type: approval
+          filters:
+            branches:
+              only:
+                - beta
+      - build:
+          requires:
+            - need-approval
       - test:
           requires:
             - build
