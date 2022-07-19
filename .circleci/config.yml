@@ -33,7 +33,6 @@ workflows:
             branches:
               only:
                 - beta
-          type: approval
       - build:
           requires:
             - need-approval
