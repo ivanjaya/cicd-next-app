@@ -9,18 +9,13 @@ executors:
       - image: cimg/node:18.4.0
 
 jobs:
-  build:
+  build_and_test:
     executor: my-executor
     steps:
       - checkout
       - run: echo "Build start on `date`"
-      - node/install-packages:
-          check-cache: detect
       - run: yarn install
       - run: yarn build
-  test:
-    executor: my-executor
-    steps:
       - run: echo "Test start on `date`"
       - run: yarn test
 
@@ -33,9 +28,6 @@ workflows:
             branches:
               only:
                 - beta
-      - build:
+      - build_and_test:
           requires:
             - need-approval
-      - test:
-          requires:
-            - build
