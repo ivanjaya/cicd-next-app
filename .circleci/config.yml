@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  node: circleci/node@5.0.2
+
 executors:
   my-executor:
     docker:
@@ -9,26 +12,19 @@ jobs:
   build:
     executor: my-executor
     steps:
-      - mkdir -p workspace
       - checkout
-      - persist_to_workspace:
-          root: workspace
-          paths:
-            - echo-output
+      - run: echo "Build start on `date`"
       - run: yarn version
       - run: yarn install
       - run: yarn build
   test:
     executor: my-executor
     steps:
-      - attach_workspace:
-          at: /workspace/echo-output
+      - run: echo "Test start on `date`"
       - run: yarn test
 
 workflows:
   build_and_test:
     jobs:
       - build
-      - test:
-          requires:
-            - build
+      - test
