@@ -19,7 +19,7 @@ jobs:
       - run: echo "Test start on `date`"
       - run: yarn test
       - run: echo "Deploy start on `date`"
-      - run: yarn start
+      - run: yarn deploy
 workflows:
   build_and_test:
     jobs:
