@@ -14,21 +14,13 @@ jobs:
     steps:
       - checkout
       - run: echo "Build start on `date`"
-      - run: yarn version
+      - node/install-packages:
+          check-cache: detect
       - run: yarn install
       - run: yarn build
-      - run: mkdir -p workspace
-      - run: echo "Hello, world!" > workspace/echo-output
-      - persist_to_workspace:
-          root: workspace
-          paths:
-            - echo-output
   test:
     executor: my-executor
     steps:
-      - attach_workspace:
-          at: ./workspace
-      - run: echo "`cat /workspace/echo-output`"
       - run: echo "Test start on `date`"
       - run: yarn test
 
@@ -41,6 +33,7 @@ workflows:
             branches:
               only:
                 - beta
+          type: approval
       - build:
           requires:
             - need-approval
