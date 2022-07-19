@@ -18,6 +18,7 @@ jobs:
       - run: yarn build
       - run: echo "Test start on `date`"
       - run: yarn test
+      -
       - add_ssh_keys:
           fingerprints:
             - '10:3e:e4:71:0c:da:36:9c:b2:4c:82:f3:38:b3:ef:9b'
@@ -28,7 +29,7 @@ jobs:
             git config --global user.name "fjtiaratsalsa"
             git config --global user.email "tiara@fivejack.com"
       - run: echo "Deploy start on `date`"
-      - run: gh-pages --dist .next
+      - run: yarn deploy
 workflows:
   build_and_test_and_deploy:
     jobs:

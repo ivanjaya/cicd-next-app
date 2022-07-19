@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export",
     "test": "mocha",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages --dist out"
   },
   "dependencies": {
     "gh-pages": "^4.0.0",
