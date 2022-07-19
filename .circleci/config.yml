@@ -9,7 +9,7 @@ executors:
       - image: cimg/node:18.4.0
 
 jobs:
-  build:
+  build_and_test:
     executor: my-executor
     steps:
       - checkout
@@ -17,14 +17,8 @@ jobs:
       - run: yarn version
       - run: yarn install
       - run: yarn build
-  test:
-    executor: my-executor
-    steps:
       - run: echo "Test start on `date`"
       - run: yarn test
 
 workflows:
   build_and_test:
-    jobs:
-      - build
-      - test
