@@ -20,13 +20,13 @@ jobs:
       - run: yarn test
       - add_ssh_keys:
           fingerprints:
-            - '10:3e:e4:71:0c:da:36:9c:b2:4c:82:f3:38:b3:ef:9b'
+            - "13:93:b9:49:ee:22:df:4d:71:ed:6c:6e:3c:27:ad:05"
       - run: npm install -g --silent gh-pages@2.0.1
       - deploy:
           name: Deploy next js app
           command: |
-            git config --global user.name "fjtiaratsalsa"
-            git config --global user.email "tiara@fivejack.com"
+      - run: git config user.email "ivanjaya@fivejack.com"
+      - run: git config user.name "Ivan"
       - run: echo "Deploy start on `date`"
       - run: yarn deploy
 workflows:
