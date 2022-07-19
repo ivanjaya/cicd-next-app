@@ -9,7 +9,7 @@ executors:
       - image: cimg/node:18.4.0
 
 jobs:
-  build_and_test:
+  build_and_test_and_deploy:
     executor: my-executor
     steps:
       - checkout
@@ -18,10 +18,18 @@ jobs:
       - run: yarn build
       - run: echo "Test start on `date`"
       - run: yarn test
+      - add_ssh_keys:
+          fingerprints:
+            - '77:bb:0d:b1:6b:04:41:7f:f0:76:c9:97:37:fb:24:4d'
+      - deploy:
+          name: Deploy next js app
+          command: |
+            git config --global user.name "fjtiaratsalsa"
+            git config --global user.email "tiara@fivejack.com"
       - run: echo "Deploy start on `date`"
-      - run: yarn deploy
+      - run: gh-pages --dist workspace
 workflows:
-  build_and_test:
+  build_and_test_and_deploy:
     jobs:
       - need-approval:
           type: approval
@@ -29,6 +37,6 @@ workflows:
             branches:
               only:
                 - beta
-      - build_and_test:
+      - build_and_test_and_deploy:
           requires:
             - need-approval
