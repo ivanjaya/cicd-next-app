@@ -20,7 +20,7 @@ jobs:
       - run: yarn test
       - add_ssh_keys:
           fingerprints:
-            - "13:93:b9:49:ee:22:df:4d:71:ed:6c:6e:3c:27:ad:05"
+            - "e1:8c:70:c7:e0:12:70:ce:d8:96:4c:4e:a8:e6:0b:a5"
       - run: npm install -g --silent gh-pages@2.0.1
       - run: git config user.email "ivanjaya@fivejack.com"
       - run: git config user.name "Ivan"
